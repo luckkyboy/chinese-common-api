@@ -1,4 +1,4 @@
-name = "chinese-common-api"
+name = "common-api"
 main = "src/worker.ts"
 compatibility_date = "2026-04-29"
 

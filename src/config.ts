@@ -37,7 +37,7 @@ export const config = {
     },
   },
   app: {
-    name: "chinese-common-api",
+    name: "common-api",
     author: "luckkyboy",
     github: "https://github.com/luckkyboy/chinese-common-api",
   },
