@@ -1,0 +1,36 @@
+{
+  "name": "chinese-common-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig.json && shx mkdir -p dist/handlers/oil-price && shx cp src/handlers/oil-price/regions.json dist/handlers/oil-price/regions.json",
+    "start": "node dist/server.js",
+    "dev": "tsx src/server.ts",
+    "deploy": "wrangler deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luckkyboy/chinese-common-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luckkyboy/chinese-common-api/issues"
+  },
+  "homepage": "https://github.com/luckkyboy/chinese-common-api#readme",
+  "type": "module",
+  "dependencies": {
+    "@hono/node-server": "^2.0.0",
+    "hono": "^4.12.15"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "shx": "^0.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.86.0"
+  }
+}

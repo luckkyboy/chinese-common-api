@@ -1,0 +1,7 @@
+# wrangler.toml
+name = 'api'
+main = "src/worker.ts"
+compatibility_date = "2026-04-29"
+
+[observability]
+enabled = true
