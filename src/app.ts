@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { getEnv, setRuntimeEnv } from "./config.js";
 import { apiRouter } from "./router.js";
 
 export function createApp() {
@@ -8,12 +9,17 @@ export function createApp() {
   app.use("*", cors());
 
   app.use("*", async (c, next) => {
+    setRuntimeEnv((c as unknown as { env?: Record<string, unknown> }).env);
+    await next();
+  });
+
+  app.use("*", async (c, next) => {
     c.header("Content-Type", "application/json; charset=utf-8");
     await next();
   });
 
   app.use("*", async (c, next) => {
-    const blacklistedIps = (process.env.BLACKLIST_IPS ?? "")
+    const blacklistedIps = (getEnv("BLACKLIST_IPS") ?? "")
       .split(",")
       .map((v) => v.trim())
       .filter(Boolean);
@@ -35,7 +41,8 @@ export function createApp() {
   });
 
   app.use("*", async (c, next) => {
-    const debug = process.env.DEBUG === "1" || c.req.query("debug") === "1";
+    const debug =
+      (getEnv("DEBUG") ?? "").trim().toLowerCase() === "1" || c.req.query("debug") === "1";
     const startedAt = Date.now();
     await next();
     if (debug) {
