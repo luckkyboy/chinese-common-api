@@ -1,7 +1,14 @@
+function getEnv(key: string): string | undefined {
+  if (typeof process !== "undefined" && process?.env) {
+    return process.env[key];
+  }
+  return undefined;
+}
+
 export const config = {
   server: {
-    host: process.env.HOST ?? "0.0.0.0",
-    port: Number(process.env.PORT ?? 8787),
+    host: getEnv("HOST") ?? "0.0.0.0",
+    port: Number(getEnv("PORT") ?? 8787),
   },
   app: {
     name: "chinese-common-api",
@@ -9,7 +16,7 @@ export const config = {
     github: "https://github.com/luckkyboy/chinese-common-api",
   },
   overseas: {
-    flag: process.env.overseas_flag ?? true,
+    flag: getEnv("overseas_flag") ?? true,
     rawBaseUrl: "https://raw.githubusercontent.com/${repo}/refs/heads/${branch}/${path}",
     chinaRawBaseUrl: "https://cdn.jsdmirror.com/gh/${repo}@${branch}/${path}",
   },
