@@ -3,8 +3,17 @@
 一个基于 TypeScript + Hono 的通用中文数据 API 服务
 支持 Cloudflare Workers 和 Node/Docker 双运行环境。
 
+## API
 > [!note]
 > 接口地址：[https://api.luckkyboy.workers.dev](https://api.luckkyboy.workers.dev)
+>
+> 所有接口同时支持GET+URL参数 + POST body两种方式获取数据。
+
+* 接口当前支持： 
+  * 全国油价查询
+    * `GET /oil-price?query=北京`
+  * 头一天热点新闻查询
+    * `GET /news?query=YYYY-MM-DD`
 
 ## 本地开发
 
@@ -34,11 +43,3 @@ docker run --rm -p 8787:8787 chinese-common-api
 ```bash
 npm run deploy
 ```
-
-## API
-
-- `GET /oil-price?query=北京`
-- `POST /oil-price`，Body: `{ "query": "北京" }`
-- `GET /news`（默认返回当天数据；当天缺失时回退到前一天）
-- `GET /news?query=YYYY-MM-DD`
-- `POST /news`，Body: `{ "query": "YYYY-MM-DD" }`
